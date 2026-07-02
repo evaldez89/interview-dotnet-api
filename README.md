@@ -28,10 +28,13 @@ To simulate a modern development workflow, **you are encouraged and expected to 
    ```bash
    dotnet ef database update
    ```
-5. Start the application to access the Swagger/OpenAPI documentation:
+5. Start the application:
    ```bash
    dotnet run
    ```
+   Then browse the interactive API reference (Scalar UI) at `/scalar`, e.g. [https://localhost:5001/scalar](https://localhost:5001/scalar) or [http://localhost:5000/scalar](http://localhost:5000/scalar). The raw OpenAPI document is served at `/openapi/v1.json`.
+
+   > **Note:** If your browser warns about an untrusted certificate on the HTTPS URL, run `dotnet dev-certs https --trust` once to trust the local dev certificate. (Not needed if you use the `http://localhost:5000` URL.)
 ---
 
 ## Technical Objectives
