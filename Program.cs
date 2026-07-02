@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using interview_dotnet_api.Data;
+using Scalar.AspNetCore;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,7 +53,16 @@ using (var scope = app.Services.CreateScope())
 
 if (app.Environment.IsDevelopment())
 {
+    // Serves the OpenAPI document at /openapi/v1.json
     app.MapOpenApi();
+
+    // Interactive API reference UI (Swagger UI replacement) at /scalar
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("Notification API")
+            .WithTheme(ScalarTheme.Purple);
+    });
 }
 
 app.UseHttpsRedirection();
@@ -60,4 +70,4 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
