@@ -11,6 +11,29 @@ To simulate a modern development workflow, **you are encouraged and expected to 
 
 ---
 
+## Getting Started
+
+1. Clone this repository or extract the provided ZIP file.
+2. Open the project:
+   * Visual Studio: open `interview-dotnet-api.sln` (File → Open → Project/Solution). Do *not* use "Open Folder" — open the `.sln` so the project loads with full Solution Explorer and F5 support.
+   * VS Code: open the project folder and install the **C# Dev Kit** extension when prompted.
+   * Rider: open `interview-dotnet-api.sln`.
+3. Verify your machine is ready (recommended before the live session) by running the readiness check from the project root:
+   ```bash
+   ./scripts/check-readiness.sh          # macOS / Linux / WSL / Git Bash
+   pwsh ./scripts/check-readiness.ps1     # Windows PowerShell
+   ```
+   It confirms the .NET 10 SDK, EF Core CLI tools, a build, and that the app starts and serves OpenAPI.
+4. Run the migrations to initialize your local SQLite database:
+   ```bash
+   dotnet ef database update
+   ```
+5. Start the application to access the Swagger/OpenAPI documentation:
+   ```bash
+   dotnet run
+   ```
+---
+
 ## Technical Objectives
 
 ### Task 1: Secure the API (20 Minutes)
@@ -45,27 +68,5 @@ Your submission will be scored out of 100 points based on:
 * **Git Hygiene (10%):** Atomic commits detailing what was achieved in each phase.
 
 ---
-
-## Getting Started
-
-1. Clone this repository or extract the provided ZIP file.
-2. Open the project:
-   * Visual Studio: open `interview-dotnet-api.sln` (File → Open → Project/Solution). Do *not* use "Open Folder" — open the `.sln` so the project loads with full Solution Explorer and F5 support.
-   * VS Code: open the project folder and install the **C# Dev Kit** extension when prompted.
-   * Rider: open `interview-dotnet-api.sln`.
-3. Verify your machine is ready (recommended before the live session) by running the readiness check from the project root:
-   ```bash
-   ./scripts/check-readiness.sh          # macOS / Linux / WSL / Git Bash
-   pwsh ./scripts/check-readiness.ps1     # Windows PowerShell
-   ```
-   It confirms the .NET 10 SDK, EF Core CLI tools, a build, and that the app starts and serves OpenAPI.
-4. Run the migrations to initialize your local SQLite database:
-   ```bash
-   dotnet ef database update
-   ```
-5. Start the application to access the Swagger/OpenAPI documentation:
-   ```bash
-   dotnet run
-   ```
 
 Good luck!
