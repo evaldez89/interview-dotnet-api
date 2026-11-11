@@ -7,6 +7,21 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var allowedOriginsString = builder.Configuration["Cors:AllowedOrigins"] ?? "http://localhost:3000";
+var allowedOrigins = allowedOriginsString
+    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
 // Add Database Context
 builder.Services.AddDbContext<NotificationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=notifications.db"));
@@ -65,8 +80,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors("AllowReactApp");
 app.UseHttpsRedirection();
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
